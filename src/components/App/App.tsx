@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./App.module.scss";
 import { ProgressBar } from "../../shared/ui/ProgressBar/progress-bar";
 import { Timer } from "../../shared/ui/Timer/timer";
@@ -34,10 +34,9 @@ function App() {
     if (currentPhase === "continues" && answers.length === questions.length) {
       dispatch(setPhase("end"));
     }
-  }, [answers, questions, dispatch]);
+  }, [answers, questions, dispatch, currentPhase]);
 
-  useEffect(() => {
-  }, [timeLeft]);
+  useEffect(() => {}, [timeLeft]);
 
   return (
     <div className={styles.app}>
@@ -47,11 +46,18 @@ function App() {
           <Timer
             timeLeft={timeLeft}
             onTick={(t) => dispatch(setTimeLeft(t))}
-            onEnd={() => currentPhase === "continues" && dispatch(setPhase("end"))}
+            onEnd={() =>
+              currentPhase === "continues" && dispatch(setPhase("end"))
+            }
             isOn={currentPhase === "continues"}
           />
         </div>
-        <ProgressBar items={questions} current={currentPhase !== "not-started" ? currentQuestion + 1 : undefined} />
+        <ProgressBar
+          items={questions}
+          current={
+            currentPhase !== "not-started" ? currentQuestion + 1 : undefined
+          }
+        />
       </div>
       <div className={styles.content}>
         {currentPhase === "not-started" && (
