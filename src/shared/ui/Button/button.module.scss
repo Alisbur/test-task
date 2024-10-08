@@ -1,0 +1,18 @@
+@use "./../../styles/colors" as c;
+@use "./../../styles/mixins" as m;
+@use "./../../styles/variables" as v;
+
+.button {
+  padding: 10px 15px;
+  @include m.setFont(v.$mainFont, v.$fs-16, v.$fw-400);
+  color: c.$buttonTextColor;
+  border: none;
+  border-radius: 5px;
+  background-color: c.$buttonColor;
+  transition: opacity 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

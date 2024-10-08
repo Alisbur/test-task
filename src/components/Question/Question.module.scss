@@ -1,0 +1,76 @@
+@use "./../../shared/styles/mixins" as m;
+@use "./../../shared/styles/variables" as v;
+
+.question {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.answerWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.answerVariant {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+.textArea {
+  @include m.setFont(v.$mainFont, v.$fs-16, v.$fw-400);
+  width: 100%;
+  max-width: 800px;
+  min-height: 200px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid black;
+  padding: 5px;
+
+  @media (max-width: 500px) {
+    min-height: 400px;
+  }
+}
+
+.textInput {
+  @include m.setFont(v.$mainFont, v.$fs-16, v.$fw-400);
+  width: 100%;
+  max-width: 600px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  visibility: hidden;
+}
+
+.fakeCheckbox {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 3px;
+
+  &_checked {
+    background-color: green;
+  }
+}

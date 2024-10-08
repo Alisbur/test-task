@@ -1,0 +1,61 @@
+import { useState, useEffect } from "react";
+import { TAnswer } from "./../shared/types/types"
+
+export function useLocalStorage(key) {
+
+  const [timeLeft, setTimeLeft] = useState([]);
+
+  useEffect(()=>{
+    getTimeLeft(key);
+  }, []);
+
+  const setTimeLeft = (time: number) => {
+
+  }
+
+  const getTimeLeft = (): number => {
+
+  }
+
+
+  const addAnswer = (title, text) => {
+    const newsItems = [{
+      id: Date.now(), 
+      title: title.trim().slice(0,TEXT_LENGTHS.title), 
+      text: text.trim().slice(0,TEXT_LENGTHS.text)}, ...news]
+    localStorage.setItem(key, JSON.stringify(newsItems));
+    setNews(newsItems);
+  }
+
+  const deleteItem = (id) => {
+    const newsItems = news.filter(item=>item.id !== id);
+    if(!newsItems.length) {
+      setNews([]);
+      localStorage.clear();
+    }
+    else {
+      localStorage.setItem(key, JSON.stringify(newsItems));
+      setNews(newsItems);
+    }
+  }
+
+  const editItem = (id, title, text) => {
+    const newsItems = news.map(item=>{
+      return item.id === id 
+        ? {
+            id, 
+            title: title.trim().slice(0,TEXT_LENGTHS.title), 
+            text: text.trim().slice(0,TEXT_LENGTHS.text)
+          } 
+        : item});
+    localStorage.setItem(key, JSON.stringify(newsItems));
+    setNews(newsItems);
+  }
+
+  const getDataFromLocalStorage = () => {
+    const news = JSON.parse(localStorage.getItem(key)) || [];
+    setNews(news);
+  }
+
+  return {news, addItem, deleteItem, editItem};
+}

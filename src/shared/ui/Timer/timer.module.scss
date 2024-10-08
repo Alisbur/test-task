@@ -1,0 +1,19 @@
+
+.timer {
+  min-width: 100px;
+  min-height: 40px;
+  margin: 0;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 5px;
+
+  &__time {
+    font-size: 24px;
+    font-weight: 600;
+    color: black;
+  }
+}
