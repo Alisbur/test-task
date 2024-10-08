@@ -1,36 +1,43 @@
 import { useCallback } from "react";
 import styles from "./Question.module.scss";
 import { TAnswerVariant } from "../../shared/types/types";
-import classNames from "classnames";
+// import classNames from "classnames";
+import { Checkbox } from "../../shared/ui/Checkbox/checkbox";
 
-const cn = classNames.bind(styles)
+// const cn = classNames.bind(styles);
 
 type Props = {
   variants: TAnswerVariant[];
   value: string[];
-  setValue: (v: any)=>void;
-}
+  setValue: (v: any) => void;
+};
 
-export const SingleQuestion = ({variants, value, setValue}: Props) => {
-
-  const onChange = useCallback((e: any) => {
-    const answerId = e.target.name.toString();
-    if (!value.includes(answerId)) {
-      setValue([answerId]);
-    } else {
-      setValue([]);
-    };
-  }, [value, setValue]);
+export const SingleQuestion = ({ variants, value, setValue }: Props) => {
+  const onChange = useCallback(
+    (e: any) => {
+      const answerId = e.target.name.toString();
+      if (!value.includes(answerId)) {
+        setValue([answerId]);
+      } else {
+        setValue([]);
+      }
+    },
+    [value, setValue]
+  );
 
   return (
     <div className={styles.answerWrapper}>
       {variants.map((v) => (
-        <label className={styles.answerVariant} key={v.id}>
-          <input type="checkbox" className={styles.checkbox} name={v.id} onChange={onChange} checked={value.includes(v.id)}/>
-          <div className={cn(styles.fakeCheckbox, value.includes(v.id) && styles.fakeCheckbox_checked )} />
-          <span>{v.value}</span>
-        </label>
+        <Checkbox
+          key={v.id}
+          id={v.id}
+          value={v.value}
+          isChecked={value.includes(v.id)}
+          onChange={onChange}
+        >
+          {v.value}
+        </Checkbox>
       ))}
     </div>
-  )
-}
+  );
+};
