@@ -1,0 +1,39 @@
+@use "./../../styles/colors" as c;
+@use "./../../styles/mixins" as m;
+@use "./../../styles/variables" as v;
+
+.answerVariant {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  transition: opacity 0.3s;
+  @include m.setFont(v.$mainFont, v.$fs-16, v.$fw-400);
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  visibility: hidden;
+}
+
+.fakeCheckbox {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 3px;
+
+  &_checked {
+    background-color: green;
+  }
+}

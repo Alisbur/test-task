@@ -1,9 +1,7 @@
 import { useCallback } from "react";
 import styles from "./Question.module.scss";
 import { TAnswerVariant } from "../../shared/types/types";
-import classNames from "classnames";
-
-const cn = classNames.bind(styles)
+import { Checkbox } from "../../shared/ui/Checkbox/checkbox";
 
 type Props = {
   variants: TAnswerVariant[];
@@ -27,17 +25,15 @@ export const MultipleQuestion = ({ variants, value, setValue }: Props) => {
   return (
     <div className={styles.answerWrapper}>
       {variants.map((v) => (
-        <label className={styles.answerVariant} key={v.id}>
-          <input
-            type="checkbox"
-            className={styles.checkbox}
-            name={v.id}
-            onChange={onChange}
-            checked={value.includes(v.id)}
-          />
-          <div className={cn(styles.fakeCheckbox, value.includes(v.id) && styles.fakeCheckbox_checked )} />
-          <span>{v.value}</span>
-        </label>
+        <Checkbox
+          key={v.id}
+          id={v.id}
+          value={v.value}
+          isChecked={value.includes(v.id)}
+          onChange={onChange}
+        >
+          {v.value}
+        </Checkbox>
       ))}
     </div>
   );
